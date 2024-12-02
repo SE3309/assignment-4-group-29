@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Recruitment Portal</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8; /* Light background for the entire page */
+            color: #333;  /* Darker text for readability */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main container to center content and limit width */
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #4CAF50;  /* Green color for emphasis */
+            font-weight: 700;
+        }
+
+        /* Section Titles Styling */
+        h2 {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;  /* Added space between fields */
+        }
+
+        form input, form button, form textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            color: #333;
+            background-color: #fafafa;  /* Light background for inputs */
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: #4CAF50;  /* Green border on focus */
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        }
+
+        form button {
+            background-color: #4CAF50;  /* Green button */
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);  /* Subtle hover effect */
+        }
+
+        form button:active {
+            transform: translateY(0);  /* Slightly pressed effect */
+        }
+
+        form button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Label Styling */
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            input, button, textarea {
+                padding: 10px;
+            }
+        }
+
+        /* Results Section Styling */
+        #results, #applicationResults, #reportResults {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #results p, #applicationResults p, #reportResults p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Success/Failure Messages */
+        .success-message {
+            color: green;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: 600;
+        }
+
+        /* Placeholder Text */
+        input::placeholder, textarea::placeholder {
+            color: #888; /* Lighter color for placeholders */
+        }
+
+        /* Spacing and Layout Enhancements */
+        .container h2 {
+            margin-top: 20px;
+        }
+
+        .container form {
+            margin-bottom: 40px;  /* More space after the forms */
+        }
+
+        button[type="submit"]:disabled {
+            background-color: #dcdcdc; /* Disabled button */
+        }
+
+        /* Navigation Styling (if needed) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-left: 20px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Job Recruitment Portal</h1>
+    </header>
+    <div class="container">
+        <!-- Search Jobs Form -->
+        <h2>Search Jobs</h2>
+        <form id="searchForm">
+            <label for="title">Job Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter Job Title" required>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter Location" required>
+            <label for="salary">Minimum Salary:</label>
+            <input type="number" id="salary" name="salary" placeholder="Enter Salary" required>
+            <button type="submit">Search</button>
+        </form>
+        <div id="results"></div>
+
+        <!-- Apply for a Job Form -->
+        <h2>Apply for a Job</h2>
+        <form id="applyForm">
+            <label for="user_id">User ID:</label>
+            <input type="number" id="user_id" name="user_id" placeholder="Your User ID" required>
+            <label for="job_id">Job ID:</label>
+            <input type="number" id="job_id" name="job_id" placeholder="Job ID" required>
+            <label for="resume_link">Resume Link:</label>
+            <input type="url" id="resume_link" name="resume_link" placeholder="Link to Resume" required>
+            <button type="submit">Apply</button>
+        </form>
+
+        <!-- Post a Job Form -->
+        <h2>Post a Job</h2>
+        <form id="postJobForm">
+            <label for="employer_id">Employer ID:</label>
+            <input type="number" id="employer_id" name="employer_id" placeholder="Employer ID" required>
+            <label for="title">Job Title:</label>
+            <input type="text" id="job_title" name="title" placeholder="Enter Job Title" required>
+            <label for="location">Location:</label>
+            <input type="text" id="job_location" name="location" placeholder="Enter Location" required>
+            <label for="salary">Salary:</label>
+            <input type="number" id="job_salary" name="salary" placeholder="Enter Salary" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" placeholder="Job Description" required></textarea>
+            <button type="submit">Post Job</button>
+        </form>
+
+        <!-- Update Job Status Form -->
+        <h2>Update Job Status</h2>
+        <form id="updateJobStatusForm">
+            <label for="job_id">Job ID:</label>
+            <input type="number" id="update_job_id" name="job_id" placeholder="Job ID" required>
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="">Select Status</option>
+                <option value="active">Active</option>
+                <option value="closed">Closed</option>
+            </select>
+            <button type="submit">Update Status</button>
+        </form>
+
+        <!-- View Applications Form -->
+        <h2>View Applications</h2>
+        <form id="viewApplicationsForm">
+            <label for="job_id">Job ID:</label>
+            <input type="number" id="view_job_id" name="job_id" placeholder="Job ID" required>
+            <button type="submit">View Applications</button>
+        </form>
+        <div id="applicationResults"></div>
+
+        <!-- Generate Reports Form -->
+        <h2>Generate Reports</h2>
+        <form id="generateReportsForm">
+            <label for="employer_id">Employer ID:</label>
+            <input type="number" id="report_employer_id" name="employer_id" placeholder="Employer ID" required>
+            <button type="submit">Generate Report</button>
+        </form>
+        <div id="reportResults"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
